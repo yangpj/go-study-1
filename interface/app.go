@@ -85,3 +85,5 @@ func emptyInterfaceTest2() {
 
 	fmt.Println(a == nil)
 }
+
+
