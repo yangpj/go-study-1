@@ -46,7 +46,9 @@ func main() {
 			job.UniqueId, job.Data, job.DataType)
 		return nil
 	}
-	w.AddServer("127.0.0.1:4730")
+	//
+	// w.AddServer("127.0.0.1:4730")
+	w.AddServer("222.185.27.23:4730")
 	w.AddFunc("ToUpper", ToUpper, worker.Immediately)
 	w.AddFunc("ToUpperTimeOut5", ToUpperDelay10, 5)
 	w.AddFunc("ToUpperTimeOut20", ToUpperDelay10, 20)
