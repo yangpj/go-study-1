@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"runtime"
 	"log"
+	"runtime"
 )
 
 func main() {
@@ -48,5 +48,3 @@ func deferTest() {
 
 func trace(s string)   { fmt.Println("//....<< entering:", s) }
 func untrace(s string) { fmt.Printf("....%s leaving..>>...// \n ", s) }
-
-var  where 

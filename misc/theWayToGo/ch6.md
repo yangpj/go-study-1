@@ -154,7 +154,9 @@ function 做为参数传递给另一个function 经常被称为callback
 
 ## 6.8 Closure (function literals)
 ----
-有时并不想给函数起名字。
+有时并不想给函数起名字。这时可以弄个匿名函数（亦即：lambda function ，function literal，或者closure）
+
+返回另一个方法的方法 可以被用作工厂方法。
 		
 
 								
