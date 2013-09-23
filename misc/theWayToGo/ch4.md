@@ -19,8 +19,7 @@ go项目的一般结构
 + 在import 之后：声明变量，常量，和类型s。
 + 之后是init() 函数（如果有的话--0个或多个哦！， 此函数是个特殊函数 每个包中的这个函数s会被先执行）
 +　在之后就是main() 入口函数了（只能声明其包为main才可以）
-+ 在之后才是其他函数 ，类型的方法先出现，或者以main中调用的顺序来声明函数，或者用某种逻辑顺序来排列函	数、方法的顺序
-例子：
++ 在之后才是其他函数 ，类型的方法先出现，或者以main中调用的顺序来声明函数，或者用某种逻辑顺序来排列函	数、方法的顺序 例子：
 ~~~
 package main
 import (
@@ -144,5 +143,88 @@ return int(whole)
 panic(fmt.Sprintf(“%g is out of the int32 range”, x))
 }
 ~~~
+
+### 算术运算符
+>  + - * / 用于整数和浮点数的运算
+>  + 运算符重载  也用在string类型的 连接上 除此外go不在允许运算符重载了
+>  复合运算符： b=b+a 缩写为 b += a  其余的 -= *= /= %= 类似
+>  i++ 等价 i += 1 等价 i = i + 1     递减那个类似  递减跟递增 只能用于语句 而不能作为表达式。 不可以做为右值出现   n = i++ 是非法的
+
+### 随机数
+- 有的程序中需要生成随机数 rand 包中 实现了伪随机数生成器
+
+### 操作符的优先级
+>   优先级	操作符
+>    7		^ !
+>	 6		* / % << >> & &^
+>	 5		+ - | ^
+>	 4		== != < <= >= >
+>	 3		<-
+>	 2		&&
+>	 1   	||
+可以使用小括号来改变哦！
+
+类型可以起别名 或是为了防止冲突 或者是为了简短方便 比如TZ （time zone）别名后 还可以为其声明其底层类型没有的一些方法！
+
+- char 型  只是特殊的int型 用单引号括起来的。
+
+~~~
+var ch byte = 'A'
+var ch byte = 65  //  var ch byte = '\x41'
+ 
+~~~
+- 字符串链接用+  在循环中用+不是高效的做法 此时最好用strings.Join(). 更好的是用byte-buffer
+- go 中用于string的函数集合在strings包中。如：
+	- strings.HasPrefix(s,prefix string) bool 
+	- strings.HasSuffix(s,suffix string) bool
+	- strings.Contains(s, substr string) bool // 是否包含字串
+	- strings.Index(s, str string) int // 返回字串在父串中的起始索引位置
+	- strings.LastIndex(s , str string ) int // 从末尾向前计算字串在父串中的第一次出现位置
+	- strings.Repeat(s,count int) string // 重复s串 count次并返回
+	- strings.ToLower(s) string 
+	- stirngs.ToUpper(s) string 
+	- strings.TrimSpace(s) string // 去除首尾的空格
+	- strings.Trim(s,str string) string // 	去除父串首尾指定的字符串
+	- strings.TrimLift/Trimright(..) string // 同上
+	- strings.Join(sl []string,sep string) string 
+	- strings.Split(..)..
+- 字符串转换 包 strconv
+	转换特定类型T 到string总是成功的	
+	strconv.Itoa(i int) string : 返回数字的字符串形式
+	strconv.FormatFloat(f float64 ,fmt byte ,prec int , bitSize int) string : fmt取值 'b' 'e' 'f' 'g'
+	
+	从字符串转到另一个类型 不一定总能够成功！
+	strconv.Atoi(s string)(i int , err error) : 转换字符串表示形式到int
+	strconv.ParseFloat(s string ,bitSize int)( f float64 , err error) 
+	
+	strconv.IntSize 这个是平台依赖的整数长度
+	
+### time 包
+	time.Now() 返回当前时间 t.Day(), t.Minute() ..  返回时间的部分组件值
+	打印自定义的时间格式：
+		~~~
+			fmt.Printf(“%02d.%02d.%4d\n”,
+			t.Day(), t.Month(), t.Year()) // e.g.: 21.07.2011
+		~~~	
+	Duration 表示两个时间的差（int64位的nanosecond 数）
+	func (t Time) Format(layout string) string 用特定的布局来格式化时间 有几个常量可以用哦
+	多长时间后执行某个动作 或者周期性执行 可以使用time.After  和 time.Ticker 方法
+	time.Sleep(Duration d) 可以暂停当前进程
+	
+### Pointers 	
+变量在内层中的位置 是一个十六进制表示的数字。
+var intP *int 
+取址操作 &
+指针变量缩写 ptr 
+go 中不允许进行指针运算！ 
+指针传递。如作为函数的参数，这时不会发生变量拷贝（仅仅是指针拷贝），指针只占4或者8字节（视os而定）
+	
+	
+		
+	
+
+
+
+
 
 
