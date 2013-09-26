@@ -1,0 +1,3 @@
+我们开发的时候有一个主代码trunk，然后每个人需要开发新feature的时候都从trunk开自己的branch到本地，
+做完merge回trunk，优点是互相不干扰，而且本地branch切换的时候代码跟着切换，
+feature和feature之间也不会干扰，这个是原来TFS做不到的
